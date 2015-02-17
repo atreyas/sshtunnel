@@ -25,8 +25,8 @@ func getPass() string {
 }
 
 func main() {
-	addr := os.Args[1]
 	port := os.Args[2]
+	addr := os.Args[1] + ":22"
 	pass := getPass()
 
 	config := &ssh.ClientConfig{
