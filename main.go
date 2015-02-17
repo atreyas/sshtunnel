@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"net"
-	"odin/comm"
 	"os"
+	"sshtunnel/comm"
 
 	"code.google.com/p/go.crypto/ssh"
 	"code.google.com/p/go.crypto/ssh/terminal"
@@ -46,6 +46,7 @@ func main() {
 
 	for {
 		localConn, err := local.Accept()
+		defer localConn.Close()
 		if err != nil {
 			log.Fatalf("listen.Accept failed: %v", err)
 		}

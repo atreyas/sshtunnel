@@ -18,12 +18,14 @@ func Forward(localConn net.Conn, config *ssh.ClientConfig, addr string, remoteAd
 	if err != nil {
 		log.Fatalf("TCP Dial to %s failed: %s", addr, err)
 	}
+	defer clientConn.Close()
 
 	// Setup sshConn (type net.Conn)
 	conn, err := clientConn.Dial("tcp", remoteAddr)
 	if err != nil {
 		log.Fatalf("Tunneling failed for %s: %s", remoteAddr, err)
 	}
+	defer conn.Close()
 
 	// Copy localConn.Reader to sshConn.Writer
 	go func() {
